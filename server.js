@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
 	}
       //------>
       // group[data.user] = data.coordinates;
-
+      console.log("send to client:", group)
      socket.emit('groupUpdate', group);
     });
     socket.on('error', function(err) {
