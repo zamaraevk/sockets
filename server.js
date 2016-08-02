@@ -22,6 +22,10 @@ io.on('connection', (socket) => {
       console.log("Incoming location:", data)
       io.to('myRoom').emit('groupUpdate', data);
     });
+  socket.on('tweet', function(data) {
+  console.log("Incoming tweet:", data)
+  //io.to('myRoom').emit('groupUpdate', data);
+  });
     socket.on('error', function(err) {
       console.log("Error", err);
     });
