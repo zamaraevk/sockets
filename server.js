@@ -20,6 +20,7 @@ io.on('connection', (socket) => {
   socket.join('myRoom');
   socket.on('location', function(data) {
       console.log("Incoming location:", data)
+      io.to('myRoom').emit('groupUpdate', data);
     });
     socket.on('error', function(err) {
       console.log("Error", err);
