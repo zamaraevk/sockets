@@ -12,14 +12,25 @@ const server = express()
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const io = socketIO(server);
-var group = {};
+var group = [];
+
 io.on('connection', (socket) => {
   console.log('Client connected');
   socket.on('location', function(data) {
       console.log("Incoming location:", data)
-     
+     // ------->
+     if(group.length){
+		for(var i=0; i<group.length; i++){
+			if(group[i].title === data.title){
+				group[i].latitude = data.latitude;
+				group[i].longitude = data.longitude;
+			}
+		}
+	} else {
+		group.push(data);
+	}
       //------>
-      group[data.user] = data.coordinates;
+      // group[data.user] = data.coordinates;
 
      socket.emit('groupUpdate', group);
     });
